@@ -462,8 +462,8 @@ img {
 .hero-top-content h1 {
     font-weight: 400;
     margin: 0 0 0 0;
-    line-height: 1.1;
-    font-size: clamp(3rem, 8vw, 8rem);
+    line-height: 1.0;
+    font-size: 8rem; /* 常に非常に大きなサイズ */
     color: #fff;
 }
 
@@ -492,7 +492,7 @@ img {
 /* メディアクエリでフォントサイズ等微調整可能 */
 @media (max-width: 768px) {
   .hero-top-content h1 {
-    font-size: clamp(2rem, 6vw, 4rem);
+    font-size: 6rem; /* 常に非常に大きなサイズ */
   }
 }
 
