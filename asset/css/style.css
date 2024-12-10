@@ -362,7 +362,8 @@ img {
     padding: 4em 1em;
 }
 .hero h1 {
-    font-size: 2.2em;
+    font-weight: 200;
+    font-size: 3.5rem;
     color: var(--brand-color);
     margin-bottom: 0em;
 }
@@ -506,8 +507,9 @@ img {
   padding: 3em 0;
 }
 .section h2 {
-    font-size: 1.8em;
     margin-bottom: 1em;
+    font-weight: 200;
+    font-size: 3rem;
     color: var(--brand-color);
     text-align: center;
 }
