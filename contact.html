@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<title>お問い合わせ | Digital Dynamic Inc.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./asset/css/style.css">
+</head>
+<body>
+
+<canvas id="networkCanvas"></canvas>
+
+<header class="global-header">
+  <div class="container">
+    <a href="index.html" class="header-logo">
+      <img src="./asset/images/company_logo.jpg" alt="Company Logo">
+    </a>
+    <div class="header-hamburger">
+      <span></span><span></span><span></span>
+    </div>
+    <nav class="header-nav">
+      <ul class="nav-list">
+        <li><a href="./services/gpu-servers.html">提供事業</a></li>
+        <li><a href="./agency.html">パートナープログラム</a></li>
+        <li><a href="./company.html">デジタルダイナミックについて</a></li>
+        <li><a href="./contact.html">お問い合わせ</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="breadcrumb-section">
+  <div class="container">
+    <p class="breadcrumb">Home > お問い合わせ</p>
+  </div>
+</section>
+
+<div class="hero-contact">
+  <div class="hero-contact-content">
+    <h1>お問い合わせ</h1>
+    <p>ご不明点やご相談がありましたらお気軽にご連絡ください。</p>
+  </div>
+</div>
+
+<section class="section contact-section">
+  <div class="container">
+    <form action="#" method="post" class="contact-form">
+      
+      <div class="form-group">
+        <label for="subject">件名<span class="required">*</span></label>
+        <input type="text" id="subject" name="subject" class="form-input" required placeholder="お問い合わせの件名をご記入ください">
+      </div>
+
+      <div class="form-group">
+        <label>お名前 (漢字)<span class="required">*</span></label>
+        <div class="name-split">
+          <input type="text" id="lastname-kanji" name="lastname-kanji" class="form-input" required placeholder="姓(漢字)">
+          <input type="text" id="firstname-kanji" name="firstname-kanji" class="form-input" required placeholder="名(漢字)">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>お名前 (カナ)<span class="required">*</span></label>
+        <div class="name-split">
+          <input type="text" id="lastname-kana" name="lastname-kana" class="form-input" required placeholder="セイ(カナ)">
+          <input type="text" id="firstname-kana" name="firstname-kana" class="form-input" required placeholder="メイ(カナ)">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="company">会社名</label>
+        <input type="text" id="company" name="company" class="form-input" placeholder="例）デジタルダイナミック株式会社">
+      </div>
+
+      <div class="form-group">
+        <label for="email">メールアドレス<span class="required">*</span></label>
+        <input type="email" id="email" name="email" class="form-input" required placeholder="例）info@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="email-confirm">メールアドレス（確認）<span class="required">*</span></label>
+        <input type="email" id="email-confirm" name="email-confirm" class="form-input" required placeholder="確認のためもう一度ご入力ください">
+      </div>
+
+      <div class="form-group">
+        <label for="phone">お電話番号</label>
+        <input type="text" id="phone" name="phone" class="form-input" placeholder="例）03-1234-5678">
+      </div>
+
+      <div class="form-group form-group-textarea">
+        <label for="message">お問い合わせ内容<span class="required">*</span></label>
+        <textarea id="message" name="message" rows="5" class="form-input" required placeholder="お問い合わせ内容をご記入ください"></textarea>
+      </div>
+
+      <p class="note">*は入力必須項目</p>
+
+      <div class="form-group form-group-submit">
+        <input type="submit" value="送信" class="submit-button">
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p><a href="company.html">会社情報</a> | <a href="#">プライバシーポリシー</a> | <a href="#">サイトマップ</a></p>
+    <p>© 2024 Digital Dynamic Inc. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="./asset/js/main.js" defer></script>
+</body>
+</html>

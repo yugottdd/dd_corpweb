@@ -1,0 +1,778 @@
+/* ------------------------------------------------------------
+   ベーススタイル・リセット
+------------------------------------------------------------ */
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+body {
+    font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.7;
+    background: none;
+}
+code {
+  font-family: 'Noto Sans Mono', monospace;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ------------------------------------------------------------
+   カラーパレット・カスタムプロパティ
+------------------------------------------------------------ */
+:root {
+    --brand-color: #2172AF;
+    --text-color: #1e1e1e;
+    --bg-color: #fff;
+    --header-bg: #fff;
+    --footer-bg: #f8f8f8;
+    --border-color: #e6e6e6;
+}
+
+/* ------------------------------------------------------------
+   レイアウト共通
+------------------------------------------------------------ */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ------------------------------------------------------------
+   ヘッダー・グローバルナビゲーション
+------------------------------------------------------------ */
+.global-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background: var(--header-bg);
+  z-index: 999;
+}
+.global-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+/* ロゴ */
+.header-logo img {
+  height: 45px;
+  display: block;
+}
+
+/* ナビゲーション */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+}
+.nav-list {
+  list-style: none;
+  display: flex;
+  gap: 2em;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+.nav-list li a {
+  color: #1e1e1e;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+  padding-bottom: 2px;
+}
+.nav-list li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  transition: width 0.3s ease;
+}
+.nav-list li a:hover::after {
+  width: 100%;
+}
+
+/* CTAボタン（ナビ内） */
+.header-cta {
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #fff;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  font-weight: bold;
+}
+.header-cta:hover {
+  background: #fff;
+  color: #1e1e1e;
+}
+
+/* ハンバーガーメニュー（モバイル用） */
+.header-hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 6px;
+}
+.header-hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #1e1e1e;
+}
+
+/* ナビゲーション・レスポンシブ対応 */
+@media (max-width: 768px) {
+  .header-hamburger {
+    display: flex;
+  }
+  .header-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1em;
+    padding: 1em;
+    width: 200px;
+    display: none;
+  }
+  .header-nav.active {
+    display: flex;
+  }
+  .nav-list {
+    flex-direction: column;
+    gap: 1em;
+  }
+  .header-cta {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ------------------------------------------------------------
+   パンくず
+------------------------------------------------------------ */
+.breadcrumb-section {
+    background: #f8f8f8;
+    padding: 1.0em 0;
+}
+.breadcrumb-section .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em; 
+    box-sizing: border-box;
+}
+.breadcrumb {
+    margin: 0;
+    padding: 0;
+    font-size: 0.9em;
+    color: #999;
+    text-align: left; 
+    line-height: 1.5;
+}
+
+/* ------------------------------------------------------------
+   ヒーローエリア（汎用）
+------------------------------------------------------------ */
+.hero {
+    background: linear-gradient(to right, rgba(71,124,254,0.2), rgba(71,124,254,0.1));
+    text-align: center;
+    padding: 4em 1em;
+}
+.hero h1 {
+    font-size: 2.2em;
+    color: var(--brand-color);
+    margin-bottom: 0em;
+}
+.hero p {
+    margin-bottom: 1em;
+    color: #555;
+}
+.hero a {
+    display: inline-block;
+    padding: 0.7em 1.2em;
+    background: var(--brand-color);
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+.hero a:hover {
+    background: #00a68b;
+}
+
+/* ------------------------------------------------------------
+   ヒーロー（特定：.hero-contact）
+------------------------------------------------------------ */
+.hero-contact {
+  background: none;
+  padding: 4em 0;
+  text-align: center;
+  position: relative;
+}
+.hero-contact-content {
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.hero-contact h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: var(--brand-color);
+  margin-bottom: 0.5em;
+}
+.hero-contact p {
+  font-size: 1.1em;
+  color: #555;
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   ヒーロー（特定：.hero-top）
+------------------------------------------------------------ */
+.hero-top {
+    position: relative;
+    z-index: 0;
+    background: url('../images/datacenter_hero.jpg') no-repeat center center;
+    background-size: cover;
+    color: #fff;
+    padding: 6em 2em;
+    text-align: center;
+}
+.hero-top::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+    pointer-events: none;
+}
+.hero-top-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1080px;
+    margin: 0 auto;
+    pointer-events: auto;
+}
+.hero-top h1 {
+    font-weight: 450;
+    color: #fff;
+    margin: 0;
+    line-height: 1.1;
+    font-size: clamp(3rem, 8vw, 8rem);
+}
+.hero-top p {
+    margin-bottom: 1.5em;
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: #fff;
+}
+.hero-top a {
+    display: inline-block;
+    background: var(--brand-color, #2172AF);
+    color: #fff;
+    padding: 0.75em 1.5em;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+.hero-top a:hover {
+    background: #00a68b;
+}
+
+/* ------------------------------------------------------------
+   セクション共通
+------------------------------------------------------------ */
+.section {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3em 0;
+}
+.section h2 {
+    font-size: 1.8em;
+    margin-bottom: 1em;
+    color: var(--brand-color);
+    text-align: center;
+}
+.section p {
+  margin: 0 0 2em 0;
+  text-align: left;
+  max-width: none;
+}
+
+/* ------------------------------------------------------------
+   ビジネス概要（.business-overview）とカード表現
+------------------------------------------------------------ */
+.business-overview {
+    width: 90%;
+    max-width: 1200px;
+    margin: 4em auto;
+}
+.section-title {
+    font-size: 2em;
+    margin-bottom: 1em;
+    text-align: center;
+    color: var(--brand-color);
+}
+
+.business-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+}
+
+.business-card {
+    position: relative;
+    flex: 1 1 calc(50% - 1em);
+    min-height: 350px;
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    color: #fff;
+    text-align: center;
+}
+
+.business-card-gpu {
+    background-image: url('../images/gpuproducts.jpg');
+}
+.business-card-dc {
+    background-image: url('../images/datacenterconstruction.jpg');
+}
+
+.business-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+.business-card-overlay {
+    position: relative;
+    z-index: 2;
+    padding: 2em;
+}
+.business-card-overlay h3 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+.business-card-overlay p {
+    margin-bottom: 1.5em;
+    font-size: 1em;
+    line-height: 1.5;
+}
+.detail-link {
+    display: inline-block;
+    color: #fff;
+    background: var(--brand-color, #2172AF);
+    text-decoration: none;
+    padding: 0.5em 1em;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background 0.3s ease;
+}
+.detail-link:hover {
+    background: #00a68b;
+}
+
+/* レスポンシブ：ビジネスカード */
+@media (max-width: 768px) {
+    .business-card {
+        flex: 1 1 100%;
+        min-height: 200px;
+    }
+    .business-card-overlay h3 {
+        font-size: 1.2em;
+    }
+    .business-card-overlay p {
+        font-size: 0.9em;
+    }
+}
+
+/* ------------------------------------------------------------
+   カード一覧レイアウト（.cards）
+------------------------------------------------------------ */
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+    margin-top: 2em;
+}
+.card {
+    background: #fff;
+    border: 1px solid var(--border-color);
+    padding: 1.5em;
+    flex: 1 1 calc(33% - 2em);
+    box-sizing: border-box;
+    transition: box-shadow 0.2s ease;
+    text-align: center;
+}
+.card h3 {
+    color: var(--text-color);
+    font-size: 1.2em;
+    margin-bottom: 0.5em;
+}
+.card p {
+    color: #555;
+    font-size: 0.95em;
+    margin-bottom: 1em;
+    line-height: 2.0;
+}
+.card p.position {
+    color: var(--text-color);
+    font-size: 0.95em;
+    margin-bottom: 0;
+    line-height: 1.5;
+    text-align: center;
+}
+.card a {
+    color: var(--brand-color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+.card a:hover {
+    color: #008f7b;
+}
+.card:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+@media (max-width: 992px) {
+    .card {
+        flex: 1 1 calc(50% - 2em);
+    }
+}
+@media (max-width: 600px) {
+    .card {
+        flex: 1 1 100%;
+    }
+}
+
+/* ------------------------------------------------------------
+   会社概要セクション
+------------------------------------------------------------ */
+.hero-company {
+    background: none;
+    padding: 4em 0;
+    position: relative;
+}
+.hero-company::before {
+    content: "";
+    position: absolute;
+    top:0; left:0; right:0; bottom:0;
+}
+.hero-company .container {
+    position: relative;
+    z-index: 2;
+}
+.hero-title {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #111;
+    margin: 0;
+}
+
+.company-overview-section {
+    background: none;
+    padding: 4em 0;
+    position: relative;
+    margin-bottom: 6em;
+}
+.company-overview-box {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  padding: 4em;
+  box-sizing: border-box;
+}
+
+.company-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1em;
+    color: #333;
+}
+
+/* 行ごとのボーダー */
+.company-table tr {
+    border-bottom: 1px solid #e6e6e6;
+}
+.company-table tr:last-child {
+    border-bottom: none;
+}
+
+/* th */
+.company-table th {
+    width: 30%;
+    font-weight: normal;
+    color: #666;
+    vertical-align: top;
+    text-align: left;
+    font-size: 0.9em;
+    line-height:1.6;
+    padding: 1em 0;
+    /* 若干小さく控えめな印象 */
+}
+
+/* tdは標準文字色でやや余裕 */
+.company-table td {
+    width: 70%;
+    color: #333;
+    vertical-align: top;
+    text-align: left;
+    padding: 1em 0;
+    line-height:1.8;
+    word-break: break-word;
+}
+
+.company-table a {
+    color: #2172AF;
+    text-decoration: none;
+    font-size: 0.9em;
+    transition: color 0.2s ease;
+}
+.company-table a:hover {
+    text-decoration: underline;
+}
+
+/* スマホで縦並び対応 */
+@media (max-width: 768px) {
+    .company-table th,
+    .company-table td {
+        display: block;
+        width:100%;
+        padding: 0.5em 0;
+    }
+    .company-table th {
+        font-size:0.85em;
+        padding:1em 0 0.2em 0;
+    }
+    .company-table td {
+        font-size:0.95em;
+        line-height:1.6;
+        padding-bottom:1em;
+    }
+    .company-table tr {
+        border-bottom: 1px solid #e6e6e6;
+    }
+}
+
+/* ------------------------------------------------------------
+   お問い合わせフォーム関連
+------------------------------------------------------------ */
+
+.contact-section {
+  padding: 4em 0;
+  background: none;
+}
+
+.contact-form {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--border-color);
+  padding: 4em;
+  box-sizing: border-box;
+}
+
+/* 全フォーム行はflexで配置 */
+.form-group {
+  display: flex;
+  align-items: center; /* 通常はcenterだが、textarea行は後で上端揃え */
+  margin-bottom: 3em;
+  flex-wrap: wrap;
+}
+
+/* テキストエリア行は上端揃え */
+.form-group-textarea {
+  align-items: flex-start; /* 行全体上端揃え */
+}
+
+/* ラベル共通スタイル */
+.form-group label {
+  font-size: 0.9em;
+  color: #333;
+  font-weight: bold;
+  flex: 0 0 180px;
+  margin:0; /* 余分なマージン除去 */
+  padding:0;
+  line-height:1.4; 
+}
+
+/* テキストエリア行でさらに個別要素を上端揃え */
+.form-group-textarea label,
+.form-group-textarea .form-input {
+  align-self: flex-start;
+  margin:0;
+  padding:0;
+  line-height:1.4; 
+  vertical-align: top; /* インライン要素としての垂直基準も上端へ */
+}
+
+/* 必須マーク */
+.required {
+  color: #e00;
+  font-size: 0.9em;
+  margin-left: 0.2em;
+}
+
+/* 入力欄共通 */
+.form-input {
+  flex:1;
+  min-width:0;
+  font-size: 1em;
+  color: #333;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background: none;
+  outline: none;
+  transition: border-color 0.3s ease;
+  line-height: 1.4;
+  margin:0; padding:0; /* 徹底的に余白除去 */
+}
+
+.form-input:focus {
+  border-bottom-color: var(--brand-color);
+}
+
+/* テキストエリア */
+textarea.form-input {
+  resize: vertical;
+  width:100%;
+  margin:0; padding:0; /* テキストエリア内部の余白も除去 */
+}
+
+/* 名前分割 */
+.name-split {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+.name-split .form-input {
+  flex:1;
+  min-width:0;
+}
+
+/* 必須説明 */
+.note {
+  font-size: 0.85em;
+  color: #555;
+  margin: 1em 0;
+}
+
+/* 送信ボタンエリア */
+.form-group-submit {
+  justify-content: center;
+}
+
+.submit-button {
+  display: inline-block;
+  background: var(--brand-color);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 0.8em 2em;
+  font-size: 1em;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.submit-button:hover {
+  background: #00a68b;
+}
+
+/* 小画面対応 */
+@media (max-width: 600px) {
+  .form-group {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .form-group label {
+    flex:0 0 auto;
+    margin-bottom:0.5em;
+  }
+  .name-split {
+    flex-direction: column;
+    gap:0.5em;
+    width:100%;
+  }
+  .submit-button {
+    width:100%;
+    text-align:center;
+  }
+}
+
+/* ------------------------------------------------------------
+   フッター
+------------------------------------------------------------ */
+footer {
+    background: var(--footer-bg);
+    padding: 2em 1em;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+footer a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 0.5em;
+    font-size: 0.9em;
+}
+footer a:hover {
+    color: var(--brand-color);
+}
+footer p {
+    color: #999;
+    font-size: 0.9em;
+    margin: 1em 0 0 0;
+}
+
+/* ------------------------------------------------------------
+   追記部分：全画面背景用canvas、コンテンツ前面表示用
+------------------------------------------------------------ */
+/* 背景アニメーション用canvas */
+#networkCanvas {
+    position: fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+    pointer-events:none;
+}
+
+/* コンテンツを前面に表示 */
+.global-header,
+.breadcrumb-section,
+.hero-company,
+.company-overview-section,
+.footer {
+    position: relative;
+    z-index: 1;
+}
