@@ -9,7 +9,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // ここからネットワークアニメーションの処理
+  // モバイル時サブメニュー開閉（任意）
+  const hasSubItems = document.querySelectorAll('.has-sub');
+  hasSubItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768) {
+        const subNav = item.querySelector('.sub-nav-list');
+        if (subNav) {
+          e.stopPropagation();
+          subNav.style.display = (subNav.style.display === 'block') ? 'none' : 'block';
+        }
+      }
+    });
+  });
+
+  // ネットワークアニメーション処理
   const canvas = document.getElementById('networkCanvas');
   const ctx = canvas.getContext('2d');
 
@@ -35,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function calculateParameters() {
     const area = width * height;
-    // 面積の平方根でスケーリングし、上限下限を設定
     NODE_COUNT = Math.round(Math.sqrt(area)/20);
     NODE_COUNT = Math.min(Math.max(NODE_COUNT,30),150);
 
@@ -58,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     calculateEdges();
 
-    // 初期に複数パルス発生で開始直後から動きを把握しやすく
+    // 初期パルス複数発生で開始直後から動きが把握しやすい
     for(let i=0; i<5; i++){
       spawnPulse();
     }
@@ -171,35 +184,4 @@ document.addEventListener('DOMContentLoaded', function() {
   calculateParameters();
   initNetwork();
   animate();
-
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-  const hamburger = document.querySelector('.header-hamburger');
-  const nav = document.querySelector('.header-nav');
-
-  if (hamburger && nav) {
-    hamburger.addEventListener('click', () => {
-      nav.classList.toggle('active');
-    });
-  }
-});
-
-  // モバイル時サブメニュー開閉（任意）
-  const hasSubItems = document.querySelectorAll('.has-sub');
-
-  hasSubItems.forEach(item => {
-    // PCではhoverで表示するためJS不要だが
-    // モバイルではクリックで展開するとよい
-    item.addEventListener('click', (e) => {
-      // モバイル時のみ発火したいなら条件判定可
-      if (window.innerWidth <= 768) {
-        const subNav = item.querySelector('.sub-nav-list');
-        if (subNav) {
-          e.stopPropagation(); // 親liへのイベント伝播防止
-          subNav.style.display = (subNav.style.display === 'block') ? 'none' : 'block';
-        }
-      }
-    });
-  });
 });
