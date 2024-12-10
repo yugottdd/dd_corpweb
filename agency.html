@@ -13,20 +13,24 @@
 
 <header class="global-header">
   <div class="container">
-    <!-- ロゴ部分 -->
-    <a href="./index.html" class="header-logo">
+    <a href="index.html" class="header-logo">
       <img src="./asset/images/company_logo.jpg" alt="Company Logo">
     </a>
 
-    <!-- ハンバーガーメニュー(モバイル用) -->
     <div class="header-hamburger">
       <span></span><span></span><span></span>
     </div>
 
-    <!-- グローバルナビゲーション -->
     <nav class="header-nav">
       <ul class="nav-list">
-        <li><a href="./services/gpu-servers.html">提供事業</a></li>
+        <li class="has-sub">
+          <!-- 提供事業はクリック不可にしてspanを使用 -->
+          <span>提供事業</span>
+          <ul class="sub-nav-list">
+            <li><a href="./services/gpu-servers.html">最新GPUサーバー調達・販売</a></li>
+            <li><a href="./services/dc-development.html">特化型データセンター開発</a></li>
+          </ul>
+        </li>
         <li><a href="./agency.html">パートナープログラム</a></li>
         <li><a href="./company.html">デジタルダイナミックについて</a></li>
         <li><a href="./contact.html">お問い合わせ</a></li>
