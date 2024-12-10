@@ -415,42 +415,71 @@ img {
 ------------------------------------------------------------ */
 .hero-top {
     position: relative;
-    z-index: 0;
-    background: url('../images/datacenter_hero.jpg') no-repeat center center;
-    background-size: cover;
-    color: #fff;
-    padding: 6em 2em;
-    text-align: center;
+    width: 100%;
+    height: calc(100vh - 80px); /* ヘッダーの高さを引いた値 */
+    min-height: 500px;
+    margin-top: 80px; /* ヘッダーの高さ分 */
+    margin-bottom: 2em;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+/* ビデオラッパー */
+.video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* オーバーレイ */
 .hero-top::before {
     content: "";
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(0,0,0,0.3);
-    z-index: 1;
-    pointer-events: none;
-}
-.hero-top-content {
-    position: relative;
     z-index: 2;
+}
+
+/* コンテンツ */
+.hero-content {
+    position: relative;
+    z-index: 3; /* オーバーレイより前面に */
+    width: 90%;
     max-width: 1080px;
     margin: 0 auto;
-    pointer-events: auto;
-}
-.hero-top h1 {
-    font-weight: 450;
+    text-align: center;
     color: #fff;
-    margin: 0;
+    padding: 0 2em;
+}
+
+.hero-content h1 {
+    font-weight: 450;
+    margin: 0 0 0.5em 0;
     line-height: 1.1;
     font-size: clamp(3rem, 8vw, 8rem);
 }
-.hero-top p {
-    margin-bottom: 1.5em;
+
+.hero-content p {
+    margin: 0 0 1.5em 0;
     font-size: 1.2em;
     line-height: 1.5;
-    color: #fff;
 }
-.hero-top a {
+
+.hero-content a {
     display: inline-block;
     background: var(--brand-color, #2172AF);
     color: #fff;
@@ -460,8 +489,139 @@ img {
     font-weight: bold;
     transition: background 0.3s ease;
 }
-.hero-top a:hover {
+
+.hero-content a:hover {
     background: #00a68b;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .hero-top {
+        height: calc(100vh - 60px); /* モバイルヘッダーの高さを引いた値 */
+        min-height: 400px;
+        margin-top: 60px; /* モバイルヘッダーの高さ分 */
+    }
+}
+
+/* フォールバック */
+@media (prefers-reduced-motion: reduce) {
+    .video-wrapper {
+        display: none;
+    }
+    
+    .hero-top {
+        background: url('../images/datacenter_hero.jpg') no-repeat center center;
+        background-size: cover;
+    }
+}/* ------------------------------------------------------------
+   ヒーロー（特定：.hero-top）
+------------------------------------------------------------ */
+.hero-top {
+    position: relative;
+    width: 100%;
+    height: 80vh; /* 画面の80%の高さ */
+    min-height: 500px;
+    margin-bottom: 2em;
+    overflow: hidden; /* はみ出た部分を隠す */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ビデオラッパー */
+.video-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 比率を保ちながら領域を埋める */
+}
+
+/* オーバーレイ */
+.hero-top::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+/* コンテンツ */
+.hero-content {
+    position: relative;
+    z-index: 3; /* オーバーレイより前面に */
+    width: 90%;
+    max-width: 1080px;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    padding: 0 2em;
+}
+
+.hero-content h1 {
+    font-weight: 450;
+    margin: 0 0 0.5em 0;
+    line-height: 1.1;
+    font-size: clamp(3rem, 8vw, 8rem);
+}
+
+.hero-content p {
+    margin: 0 0 1.5em 0;
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.hero-content a {
+    display: inline-block;
+    background: var(--brand-color, #2172AF);
+    color: #fff;
+    padding: 0.75em 1.5em;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.hero-content a:hover {
+    background: #00a68b;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .hero-top {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .hero-content {
+        padding: 0 1em;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2rem, 6vw, 4rem);
+    }
+}
+
+/* フォールバック */
+@media (prefers-reduced-motion: reduce) {
+    .video-wrapper {
+        display: none;
+    }
+    
+    .hero-top {
+        background: url('../images/datacenter_hero.jpg') no-repeat center center;
+        background-size: cover;
+    }
 }
 
 /* ------------------------------------------------------------
@@ -491,7 +651,7 @@ img {
 .business-overview {
     width: 90%;
     max-width: 1200px;
-    margin: 4em auto;
+    margin: 1em auto;
 }
 .section-title {
     font-size: 2em;
