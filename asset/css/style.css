@@ -391,7 +391,7 @@ img {
     padding: 4em 1em;
 }
 .hero h1 {
-    font-weight: 200;
+    font-weight: 300;
     font-size: 3.5rem;
     color: var(--brand-color);
     margin-bottom: 0em;
@@ -537,7 +537,7 @@ img {
 }
 .section h2 {
     margin-bottom: 1em;
-    font-weight: 200;
+    font-weight: 300;
     font-size: 2.5rem;
     color: var(--brand-color);
     text-align: center;
@@ -613,7 +613,7 @@ img {
 }
 .business-card-overlay h3 {
     font-size: 1.75em;
-    font-weight: 200;
+    font-weight: 300;
     margin-bottom: 0.5em;
     font-weight: bold;
 }
