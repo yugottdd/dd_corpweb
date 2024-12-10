@@ -2,25 +2,36 @@ document.addEventListener('DOMContentLoaded', function() {
   // ハンバーガーメニュー処理
   const hamburger = document.querySelector('.header-hamburger');
   const nav = document.querySelector('.header-nav');
+  const hasSubMenus = document.querySelectorAll('.has-sub > span');
 
   if (hamburger && nav) {
     hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
       nav.classList.toggle('active');
     });
   }
 
-  // モバイル時サブメニュー開閉（任意）
-  const hasSubItems = document.querySelectorAll('.has-sub');
-  hasSubItems.forEach(item => {
-    item.addEventListener('click', (e) => {
+  // サブメニューの開閉（モバイル時）
+  hasSubMenus.forEach(submenu => {
+    submenu.addEventListener('click', function(e) {
       if (window.innerWidth <= 768) {
-        const subNav = item.querySelector('.sub-nav-list');
-        if (subNav) {
-          e.stopPropagation();
-          subNav.style.display = (subNav.style.display === 'block') ? 'none' : 'block';
-        }
+        e.preventDefault();
+        e.stopPropagation();
+        const subNav = this.nextElementSibling;
+        subNav.classList.toggle('active');
       }
     });
+  });
+
+  // ウィンドウリサイズ時の処理
+  window.addEventListener('resize', function() {
+    if (window.innerWidth > 768) {
+      hamburger.classList.remove('active');
+      nav.classList.remove('active');
+      document.querySelectorAll('.sub-nav-list').forEach(subNav => {
+        subNav.classList.remove('active');
+      });
+    }
   });
 
   // ネットワークアニメーション処理

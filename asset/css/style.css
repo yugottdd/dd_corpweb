@@ -1,3 +1,5 @@
+統合した完全なCSS
+
 /* ------------------------------------------------------------
    ベーススタイル・リセット
 ------------------------------------------------------------ */
@@ -51,7 +53,7 @@ img {
 ------------------------------------------------------------ */
 .global-header {
   position: relative;
-  z-index: 999999; /* 非常に高い値で最前面 */
+  z-index: 1000; /* より大きな値に設定 */
   top: 0;
   width: 100%;
   background: var(--header-bg);
@@ -108,7 +110,7 @@ img {
   color: #1e1e1e;
   text-decoration: none;
   font-weight: 500;
-  padding-bottom: 4px; /* 下線と文字間隔 */
+  padding-bottom: 4px;
   display: inline-block;
 }
 .nav-list li a::after,
@@ -118,7 +120,7 @@ img {
   left: 50%;
   bottom: 0;
   height: 2px;
-  background: currentColor; /* テキスト色と同じ */
+  background: currentColor;
   width: 100%;
   transform: translateX(-50%) scaleX(0);
   transform-origin: center;
@@ -159,11 +161,11 @@ img {
   top: 100%;
   left: 0;
   background: #fff;
-  padding: 0.5em 1em; 
-  margin:0;
+  padding: 0.5em 1em;
+  margin: 0;
   min-width: 200px;
   display: none;
-  z-index: 1000000; /* global-header以上に上げる */
+  z-index: 1000000;
 }
 .sub-nav-list li {
   position: relative;
@@ -173,9 +175,9 @@ img {
   color: #1e1e1e;
   text-decoration: none;
   font-weight: 400;
-  font-size:0.9em;
+  font-size: 0.9em;
   white-space: nowrap;
-  padding:0 0 4px 0; 
+  padding: 0 0 4px 0;
   position: relative;
 }
 
@@ -187,7 +189,7 @@ img {
   bottom: 0;
   height: 2px;
   background: currentColor;
-  width: 100%; 
+  width: 100%;
   transform: translateX(-50%) scaleX(0);
   transform-origin: center;
   transition: transform 0.3s ease;
@@ -197,7 +199,7 @@ img {
 }
 
 /* PCでhover時にサブメニュー表示 */
-@media (min-width:769px) {
+@media (min-width: 769px) {
   .has-sub:hover .sub-nav-list {
     display: block;
   }
@@ -209,68 +211,129 @@ img {
   flex-direction: column;
   cursor: pointer;
   gap: 6px;
+  padding: 0.5em;
+  z-index: 1000;
 }
 .header-hamburger span {
   display: block;
   width: 25px;
   height: 3px;
   background: #1e1e1e;
+  transition: all 0.3s ease;
 }
 
 /* モバイル対応（768px以下） */
 @media (max-width: 768px) {
-  .header-hamburger {
-    display: flex;
+  .global-header {
+    position: relative;
+    z-index: 1000; /* 明示的なz-index設定 */
   }
 
-  /* モバイル時：初期非表示、.activeで表示 */
+  .header-hamburger {
+    display: flex;
+    padding: 0.5em;
+    z-index: 1001; /* ヘッダーより上に表示 */
+  }
+
   .header-nav {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 999; /* ヘッダーのすぐ下の値 */
   }
 
   .header-nav.active {
-    display: flex;
-    position: relative;
-    top: 100%;
-    right: 0;
-    background: #fff;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1em;
-    padding: 1em;
-    width: 200px;
-    z-index: 1000000;
+    display: block;
   }
 
   .nav-list {
     flex-direction: column;
-    gap: 1em;
+    width: 100%;
+    padding: 1em;
+    margin: 0;
+    background: #fff; /* 背景色を明示的に設定 */
   }
 
-  .header-cta {
+  .nav-list li {
     width: 100%;
-    text-align: center;
+    position: relative; /* 子要素の基準位置として設定 */
+  }
+
+  .nav-list li a,
+  .has-sub > span {
+    display: block;
+    padding: 0.8em 0;
+    width: 100%;
+    border-bottom: 1px solid var(--border-color);
+    position: relative; /* アンダーライン用 */
+  }
+
+  .nav-list li:last-child a,
+  .nav-list li:last-child .has-sub > span {
+    border-bottom: none; /* 最後の要素の下線を削除 */
   }
 
   .sub-nav-list {
     position: static;
-    border:none;
-    min-width:100%;
+    display: none;
+    width: 100%;
+    padding: 0 0 0 1em;
+    margin: 0.5em 0;
+    background: #fff; /* サブメニューの背景色を設定 */
+    box-shadow: none; /* モバイル時はシャドウを削除 */
+  }
+
+  .sub-nav-list.active {
+    display: block;
   }
 
   .sub-nav-list li a {
-    border-bottom: 1px solid var(--border-color);
+    padding: 0.6em 0; /* サブメニューの余白を少し小さく */
+    font-size: 0.95em; /* サブメニューのフォントサイズを少し小さく */
+  }
+
+  /* ハンバーガーメニュー active 時のアニメーション */
+  .header-hamburger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .header-hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header-hamburger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  /* メニュー展開時の背景オーバーレイ（任意） */
+  .header-nav.active::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+  }
+
+  /* アンダーラインアニメーションの無効化 */
+  .nav-list li a::after,
+  .has-sub > span::after {
+    display: none;
   }
 }
-
-
 
 /* ------------------------------------------------------------
    パンくず
 ------------------------------------------------------------ */
 .breadcrumb-section {
-    position: static; /* 不要なpositionとz-indexを削除 */
-    z-index: auto;
+    position: relative;
+    z-index: 1; /* ヘッダーより小さな値に設定 */
     background: #f8f8f8;
     padding: 1em 0;
 }
