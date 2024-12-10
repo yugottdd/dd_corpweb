@@ -576,7 +576,8 @@ img {
     padding: 2em;
 }
 .business-card-overlay h3 {
-    font-size: 1.5em;
+    font-size: 1.6em;
+    font-weight: 200;
     margin-bottom: 0.5em;
     font-weight: bold;
 }
