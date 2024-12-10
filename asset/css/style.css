@@ -72,39 +72,52 @@ img {
   display: block;
 }
 
-/* ナビゲーション */
+/* 初期状態でヘッダー-navはPC用にflex, モバイルで非表示を後で指定 */
 .header-nav {
-  display: flex;
+  display: flex; 
   align-items: center;
   gap: 2em;
 }
+
+/* 親メニューリスト */
 .nav-list {
   list-style: none;
-  display: flex;
-  gap: 2em;
   margin: 0;
   padding: 0;
+  display: flex;
+  gap: 2em;
   justify-content: center;
 }
-.nav-list li a {
+
+/* 親メニュー項目（アンダーラインアニメ） */
+.nav-list li {
+  position: relative;
+}
+.nav-list li a,
+.has-sub > span {
+  position: relative;
   color: #1e1e1e;
   text-decoration: none;
   font-weight: 500;
-  position: relative;
-  padding-bottom: 2px;
+  padding-bottom: 4px; /* 下線と文字間隔 */
+  display: inline-block;
 }
-.nav-list li a::after {
+.nav-list li a::after,
+.has-sub > span::after {
   content: "";
   position: absolute;
-  left: 0;
+  left: 50%;
   bottom: 0;
-  width: 0;
-  height: 1px;
-  background: #fff;
-  transition: width 0.3s ease;
-}
-.nav-list li a:hover::after {
+  height: 2px;
+  background: currentColor;
   width: 100%;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.nav-list li a:hover::after,
+.has-sub > span:hover::after {
+  transform: translateX(-50%) scaleX(1);
 }
 
 /* CTAボタン（ナビ内） */
@@ -122,6 +135,65 @@ img {
   color: #1e1e1e;
 }
 
+/* 親メニューがサブメニューを持つ場合 */
+.has-sub {
+  position: relative;
+}
+.has-sub > span {
+  cursor: default;
+}
+
+/* サブメニュー */
+.sub-nav-list {
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  padding: 0.5em 1em; 
+  margin:0;
+  min-width: 200px;
+  display: none;
+  z-index: 998;
+}
+.sub-nav-list li {
+  position: relative;
+}
+.sub-nav-list li a {
+  display: inline-block;
+  color: #1e1e1e;
+  text-decoration: none;
+  font-weight: 400;
+  font-size:0.9em;
+  white-space: nowrap;
+  padding:0 0 4px 0; /* テキスト幅下線用 */
+  position: relative;
+}
+
+/* サブメニュー項目アンダーラインアニメ */
+.sub-nav-list li a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  height: 2px;
+  background: currentColor;
+  width: 100%; 
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+}
+.sub-nav-list li a:hover::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* PCサイズでホバー時にサブメニュー表示 */
+@media (min-width:769px) {
+  .has-sub:hover .sub-nav-list {
+    display: block;
+  }
+}
+
 /* ハンバーガーメニュー（モバイル用） */
 .header-hamburger {
   display: none;
@@ -136,12 +208,15 @@ img {
   background: #1e1e1e;
 }
 
-/* ナビゲーション・レスポンシブ対応 */
+/* モバイル対応（768px以下） */
 @media (max-width: 768px) {
-  .header-hamburger {
-    display: flex;
-  }
+  /* PCではnavがflexだが、モバイルでデフォルト非表示に上書き */
   .header-nav {
+    display: none; /* モバイル初期非表示 */
+  }
+
+  .header-nav.active {
+    display: flex; /* activeで表示 */
     position: absolute;
     top: 100%;
     right: 0;
@@ -151,20 +226,34 @@ img {
     gap: 1em;
     padding: 1em;
     width: 200px;
-    display: none;
   }
-  .header-nav.active {
+
+  .header-hamburger {
     display: flex;
   }
+
   .nav-list {
     flex-direction: column;
     gap: 1em;
   }
+
   .header-cta {
     width: 100%;
     text-align: center;
   }
+
+  .sub-nav-list {
+    position: static;
+    border:none;
+    min-width:100%;
+  }
+
+  .sub-nav-list li a {
+    border-bottom: 1px solid var(--border-color);
+  }
 }
+
+
 
 /* ------------------------------------------------------------
    パンくず

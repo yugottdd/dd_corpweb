@@ -173,3 +173,33 @@ document.addEventListener('DOMContentLoaded', function() {
   animate();
 
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const hamburger = document.querySelector('.header-hamburger');
+  const nav = document.querySelector('.header-nav');
+
+  if (hamburger && nav) {
+    hamburger.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+  }
+});
+
+  // モバイル時サブメニュー開閉（任意）
+  const hasSubItems = document.querySelectorAll('.has-sub');
+
+  hasSubItems.forEach(item => {
+    // PCではhoverで表示するためJS不要だが
+    // モバイルではクリックで展開するとよい
+    item.addEventListener('click', (e) => {
+      // モバイル時のみ発火したいなら条件判定可
+      if (window.innerWidth <= 768) {
+        const subNav = item.querySelector('.sub-nav-list');
+        if (subNav) {
+          e.stopPropagation(); // 親liへのイベント伝播防止
+          subNav.style.display = (subNav.style.display === 'block') ? 'none' : 'block';
+        }
+      }
+    });
+  });
+});
