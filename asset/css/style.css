@@ -15,7 +15,7 @@ body {
     margin: 0;
     padding: 0;
     color: #333;
-    line-height: 1.7;
+    line-height: 1.5;
     background: none;
 }
 code {
@@ -131,19 +131,48 @@ img {
   transform: translateX(-50%) scaleX(1);
 }
 
-/* CTAボタン（ナビ内） */
-.header-cta {
-  color: #fff;
-  text-decoration: none;
-  border: 1px solid #fff;
+/* 言語切り替えボタン */
+.lang-switch-toggle {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #000; 
+  overflow: hidden; /* li間の重なり防止 */
+  font-size: 0.9em;
+  line-height: 1;
+}
+
+.lang-switch-toggle li {
+  flex: 1; /* 均等な幅で2分割 */
+  text-align: center;
+}
+
+.lang-switch-toggle li a {
+  display: block;
   padding: 0.5em 1em;
-  border-radius: 4px;
-  transition: background 0.3s ease;
+  text-decoration: none;
+  color: #000;
+  font-weight: normal;
+  background: #fff; /* デフォルトは白地に黒文字 */
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* アクティブな言語側は黒地に白文字 */
+.lang-switch-toggle li a.active {
+  background: #000;
+  color: #fff;
   font-weight: bold;
 }
-.header-cta:hover {
-  background: #fff;
-  color: #1e1e1e;
+
+/* ホバー時に若干反転など演出しても良い */
+.lang-switch-toggle li a:not(.active):hover {
+  background: #f2f2f2; /* 非アクティブ側を少しグレー掛かった白に */
+}
+
+/* 必要に応じて、左右のボーダー線を消すなど微調整可 */
+.lang-switch-toggle li:first-child a.active {
+  border-right: 1px solid #000;
 }
 
 /* 親メニューがサブメニューを持つ場合 */
@@ -469,9 +498,9 @@ img {
 }
 
 .hero-top-content p {
-    margin: 0.5em 0 2.0em 0;
-    font-size: 1em;
-    line-height: 1.4;
+    margin: 0.5em 0 1.5em 0;
+    font-size: 1.5em;
+    line-height: 1.5em;
     color: #fff;
 }
 
@@ -509,12 +538,14 @@ img {
 .section h2 {
     margin-bottom: 1em;
     font-weight: 200;
-    font-size: 3rem;
+    font-size: 2.5rem;
     color: var(--brand-color);
     text-align: center;
 }
 .section p {
   margin: 0 0 2em 0;
+  font-size: 1.25rem;
+  line-height: 2.0em;
   text-align: left;
   max-width: none;
 }
@@ -528,10 +559,15 @@ img {
     margin: 1em auto;
 }
 .section-title {
-    font-size: 2em;
-    margin-bottom: 1em;
+    line-height: 1.2em;
+    margin-bottom: 0.5em;
     text-align: center;
     color: var(--brand-color);
+}
+.section-title p {
+    margin: 0 0 2em 0;
+    text-align: left;
+    max-width: none;
 }
 
 .business-cards {
@@ -576,14 +612,14 @@ img {
     padding: 2em;
 }
 .business-card-overlay h3 {
-    font-size: 1.6em;
+    font-size: 1.75em;
     font-weight: 200;
     margin-bottom: 0.5em;
     font-weight: bold;
 }
 .business-card-overlay p {
     margin-bottom: 1.5em;
-    font-size: 1em;
+    font-size: 1.0em;
     line-height: 1.5;
 }
 .detail-link {
